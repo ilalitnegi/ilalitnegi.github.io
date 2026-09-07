@@ -1,257 +1,659 @@
-
-
 <!DOCTYPE html>
-<html>
-<meta http-equiv="cache-control" content="max-age=0" />
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="expires" content="0" />
-<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-<meta http-equiv="pragma" content="no-cache" />
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <!-- name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <title>Lalit Negi</title>
-    <link rel="stylesheet" href="customcss.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — GIS & Spatial Simulation</title>
+<meta name="description" content="PhD applicant in GIS and spatial simulation. Research interests, projects, and contact.">
 
-    <script>
-        function unhide(divID) {
-                var item = document.getElementById(divID);
-                if (item) {
-                    item.className=(item.className=='hidden')?'unhidden':'hidden';
-                }
-        }
-    </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+<style>
+  :root{
+    --paper:      #EDE8DC;
+    --paper-dim:  #E2DCCC;
+    --ink:        #202B24;
+    --ink-soft:   #4B564C;
+    --contour:    #3F5B4F;
+    --water:      #4C6B8A;
+    --marker:     #B96A2C;
+    --line:       rgba(32,43,36,0.16);
+    --card-bg:    #F4F0E4;
+    --max-w:      920px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Spectral', serif;
+    font-weight:600;
+    margin:0 0 0.4em 0;
+    color:var(--ink);
+  }
+
+  a{ color:var(--water); }
+
+  .coord{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    letter-spacing:0.02em;
+  }
+
+  .wrap{
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- topographic background ---------- */
+  .contour-bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    opacity:0.55;
+    pointer-events:none;
+  }
+
+  /* ---------- header / nav ---------- */
+  header{
+    position:sticky;
+    top:0;
+    background:rgba(237,232,220,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    z-index:50;
+  }
+  .nav-inner{
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding:16px 28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .brand{
+    font-family:'Spectral', serif;
+    font-size:1.15rem;
+    font-weight:600;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .brand span{ color:var(--marker); }
+
+  nav.tabs{
+    display:flex;
+    gap:4px;
+  }
+  nav.tabs button{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.92rem;
+    background:none;
+    border:none;
+    padding:8px 14px;
+    color:var(--ink-soft);
+    cursor:pointer;
+    border-radius:3px;
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  nav.tabs button:hover{ background:var(--paper-dim); color:var(--ink); }
+  nav.tabs button.active{
+    color:var(--ink);
+    background:var(--card-bg);
+    box-shadow:inset 0 -2px 0 var(--marker);
+  }
+
+  section{ display:none; padding:64px 0 40px; }
+  section.active{ display:block; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding-top:0;
+  }
+  .hero-inner{
+    position:relative;
+    z-index:1;
+    padding:72px 0 56px;
+  }
+  .hero .coord{ display:block; margin-bottom:18px; }
+  .hero h1{
+    font-size:clamp(2.1rem, 5vw, 3.1rem);
+    line-height:1.12;
+    max-width:11ch;
+  }
+  .hero .role{
+    font-size:1.15rem;
+    color:var(--contour);
+    font-weight:500;
+    margin-bottom:22px;
+  }
+  .hero p.lede{
+    max-width:60ch;
+    color:var(--ink-soft);
+    font-size:1.05rem;
+  }
+  .hero-links{
+    margin-top:26px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .hero-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    text-decoration:none;
+    color:var(--ink);
+    border-bottom:1px solid var(--ink);
+    padding-bottom:2px;
+  }
+  .hero-links a:hover{ color:var(--marker); border-color:var(--marker); }
+
+  /* ---------- generic section header ---------- */
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:32px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:14px;
+  }
+  .section-head h2{ font-size:1.7rem; }
+  .section-head .coord{ margin-left:auto; }
+
+  /* ---------- about / research ---------- */
+  .lead-para{
+    font-size:1.05rem;
+    max-width:66ch;
+    color:var(--ink);
+  }
+  .lead-para + .lead-para{ margin-top:1em; }
+
+  .interest-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:18px;
+    margin-top:30px;
+  }
+  .interest-card{
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:20px;
+  }
+  .interest-card .coord{ margin-bottom:8px; }
+  .interest-card h3{ font-size:1.05rem; margin-bottom:6px; }
+  .interest-card p{ margin:0; color:var(--ink-soft); font-size:0.94rem; }
+
+  /* ---------- projects ---------- */
+  .project-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:20px;
+  }
+  .project-card{
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+    cursor:pointer;
+    text-align:left;
+    padding:0;
+    font-family:inherit;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .project-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 24px rgba(32,43,36,0.12);
+  }
+  .project-thumb{
+    width:100%;
+    height:150px;
+    display:block;
+  }
+  .project-body{ padding:18px 20px 20px; }
+  .project-body .coord{ margin-bottom:6px; }
+  .project-body h3{ font-size:1.1rem; margin-bottom:6px; }
+  .project-body p{ margin:0; color:var(--ink-soft); font-size:0.92rem; }
+  .tag-row{ margin-top:12px; display:flex; gap:6px; flex-wrap:wrap; }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    padding:3px 8px;
+    background:var(--paper-dim);
+    border-radius:2px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- modal ---------- */
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(32,43,36,0.55);
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    padding:48px 20px;
+    overflow-y:auto;
+    z-index:100;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal{
+    background:var(--paper);
+    max-width:720px;
+    width:100%;
+    border-radius:6px;
+    padding:36px;
+    position:relative;
+    animation:rise 0.18s ease;
+  }
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .modal-close{
+    position:absolute;
+    top:18px;
+    right:18px;
+    background:none;
+    border:none;
+    font-size:1.4rem;
+    line-height:1;
+    cursor:pointer;
+    color:var(--ink-soft);
+  }
+  .modal-close:hover{ color:var(--marker); }
+  .modal .coord{ margin-bottom:10px; }
+  .modal h3{ font-size:1.5rem; margin-bottom:4px; }
+  .modal .role-line{ color:var(--contour); font-weight:500; margin-bottom:18px; font-size:0.95rem; }
+  .modal-gallery{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin:20px 0;
+  }
+  .modal-gallery svg{ width:100%; height:120px; border-radius:4px; display:block; }
+  .modal p{ color:var(--ink); font-size:0.98rem; }
+  .modal .tag-row{ margin-top:18px; }
+
+  /* ---------- publications / CV ---------- */
+  .pub-list{ list-style:none; padding:0; margin:0; }
+  .pub-list li{
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    gap:16px;
+    align-items:baseline;
+  }
+  .pub-list li:first-child{ padding-top:0; }
+  .pub-year{ font-family:'IBM Plex Mono', monospace; font-size:0.85rem; color:var(--marker); min-width:44px; }
+  .pub-text strong{ font-weight:600; }
+  .pub-text{ color:var(--ink-soft); font-size:0.95rem; }
+
+  .cv-download{
+    margin-top:28px;
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.88rem;
+    padding:10px 18px;
+    border:1px solid var(--ink);
+    border-radius:3px;
+    text-decoration:none;
+    color:var(--ink);
+  }
+  .cv-download:hover{ background:var(--ink); color:var(--paper); }
+
+  /* ---------- contact ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:20px;
+    margin-top:10px;
+  }
+  .contact-item .coord{ display:block; margin-bottom:6px; }
+  .contact-item a, .contact-item span{ font-size:1rem; }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:24px 0 60px;
+    text-align:center;
+  }
+  footer .coord{ opacity:0.7; }
+
+  @media (max-width:600px){
+    nav.tabs{ width:100%; justify-content:flex-start; overflow-x:auto; }
+    .nav-inner{ flex-direction:column; align-items:flex-start; }
+    .section-head{ flex-wrap:wrap; }
+    .modal{ padding:26px; }
+    .modal-gallery{ grid-template-columns:1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
 </head>
-
 <body>
-    <div class="wrapper">
 
-        <div class="posts-wrapper">
-            <div class="post">
-                <h1>Lalit Negi</h1>
+<header>
+  <div class="nav-inner">
+    <a href="#" class="brand">Your Name<span>.</span></a>
+    <nav class="tabs">
+      <button data-tab="about" class="active">About</button>
+      <button data-tab="research">Research</button>
+      <button data-tab="projects">Projects</button>
+      <button data-tab="publications">Publications</button>
+      <button data-tab="contact">Contact</button>
+    </nav>
+  </div>
+</header>
 
-                <img src="profile_pic.png" style="float:right; width:220px;" />
+<!-- ================= ABOUT / HERO ================= -->
+<section id="about" class="active hero">
+  <svg class="contour-bg" viewBox="0 0 920 420" preserveAspectRatio="xMidYMid slice">
+    <g fill="none" stroke="#3F5B4F" stroke-width="1">
+      <path opacity="0.25" d="M-20,60 C150,20 300,110 460,70 C620,30 760,90 940,50"/>
+      <path opacity="0.22" d="M-20,110 C160,70 300,160 470,120 C630,80 770,140 940,100"/>
+      <path opacity="0.20" d="M-20,160 C170,120 310,210 480,170 C640,130 780,190 940,150"/>
+      <path opacity="0.18" d="M-20,210 C180,170 320,260 490,220 C650,180 790,240 940,200"/>
+      <path opacity="0.16" d="M-20,260 C190,220 330,310 500,270 C660,230 800,290 940,250"/>
+      <path opacity="0.14" d="M-20,310 C200,270 340,360 510,320 C670,280 810,340 940,300"/>
+    </g>
+    <circle cx="640" cy="140" r="4" fill="#B96A2C"/>
+    <text x="652" y="144" font-family="IBM Plex Mono" font-size="11" fill="#4B564C">28.61°N, 77.20°E</text>
+  </svg>
 
-                lalitnegi0511@gmail.com // lalitn.md20@nsut.ac.in <br>
-                <h2><a href="https://www.linkedin.com/in/lalitnegi05/">LinkedIn</a> // <a href="https://scholar.google.com/citations?user=LXctJfMAAAAJ&hl=en">Scholar</a> // <a href="https://www.github.com/garimachhikara128/">GitHub</a></h2><br>
-                <p style="margin-left:3em;margin-top:-0.5em;margin-bottom:1em;"></p>
-                <h2>Office: <a href="https://maps.app.goo.gl/L6Vs56U9utTuCTLk7">Central Research Laboratory, Bharat Electronics Limited, India</a></h2><br>
-                <br>
+  <div class="wrap hero-inner">
+    <span class="coord">PHD APPLICANT — GIS &amp; SPATIAL SIMULATION</span>
+    <h1>Your Name</h1>
+    <div class="role">Modeling how places change — geospatial analysis, agent-based &amp; cellular-automata simulation</div>
+    <p class="lede">
+      <!-- EDIT: 2-3 sentence bio -->
+      I'm a geospatial researcher looking for a PhD position where I can combine GIS-based spatial analysis
+      with simulation modeling — land-use change, urban growth, hydrology, or mobility — to answer questions
+      that matter for how people and environments interact over time.
+    </p>
+    <div class="hero-links">
+      <a href="mailto:you@example.com">you@example.com</a>
+      <a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" onclick="showTab('publications'); return false;">CV / Publications</a>
+    </div>
+  </div>
+</section>
 
-                <p>
-                   I am working as a Member Research Staff, where I build simulators using C++, Unity, and C#. My work involves developing simulation systems 
-                   and applications based on project requirements. I am interested in artificial intelligence and climate change. I want to use AI techniques 
-                   for weather prediction, climate analysis, and environmental studies. My goal is to develop tools and models that can support climate understanding and decision-making.
-                </p>
+<!-- ================= RESEARCH ================= -->
+<section id="research">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Research interests</h2>
+      <span class="coord">FIELD NOTES</span>
+    </div>
 
-                <p style="margin-left:3em;margin-top:-0.5em;margin-bottom:0.4em;"></p>
-                
-            </div>
-        </div>
+    <p class="lead-para">
+      <!-- EDIT -->
+      My work sits at the intersection of geographic information science and computational simulation.
+      I'm interested in how spatial data — remote sensing, vector/raster layers, sensor and mobility traces —
+      can drive dynamic models that forecast or explain change across landscapes and cities.
+    </p>
+    <p class="lead-para">
+      I'm applying to PhD programs where I can develop this further, ideally with a group working on
+      urban growth modeling, hydrological or environmental simulation, or agent-based approaches to
+      human-environment systems.
+    </p>
 
-       
-        <div style="text-align: center; font-weight: bold; color: darkred;">
- ** Looking for PhD positions in Climate Change **
+    <div class="interest-grid">
+      <div class="interest-card">
+        <span class="coord">01 — LAND USE</span>
+        <h3>Land-use & land-cover change</h3>
+        <p>Cellular automata and Markov-chain models to project urban expansion and land-cover transitions.</p>
+      </div>
+      <div class="interest-card">
+        <span class="coord">02 — AGENT-BASED</span>
+        <h3>Agent-based simulation</h3>
+        <p>Simulating individual movement and decision-making over geospatial networks (mobility, evacuation, migration).</p>
+      </div>
+      <div class="interest-card">
+        <span class="coord">03 — REMOTE SENSING</span>
+        <h3>Remote sensing &amp; GIS</h3>
+        <p>Satellite imagery classification and spatial analysis pipelines feeding directly into simulation inputs.</p>
+      </div>
+      <div class="interest-card">
+        <span class="coord">04 — HYDROLOGY</span>
+        <h3>Environmental &amp; hydrological modeling</h3>
+        <p>Coupling terrain data (DEMs) with hydrological or climate-impact simulations at watershed scale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Personal projects</h2>
+      <span class="coord">CLICK TO EXPAND</span>
+    </div>
+
+    <div class="project-grid" id="project-grid"><!-- populated by JS --></div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+    <span class="coord" id="modal-coord"></span>
+    <h3 id="modal-title"></h3>
+    <div class="role-line" id="modal-role"></div>
+    <div class="modal-gallery" id="modal-gallery"></div>
+    <p id="modal-desc"></p>
+    <div class="tag-row" id="modal-tags"></div>
+  </div>
 </div>
- 
-        <!-- <div class="posts-wrapper">
-            <div class="post" style="margin-bottom:1.25em;">
 
-            <ul class="news">
-            <li><strong>Oct. 2025:</strong> Research grant worth INR 3 Crore received from MeitY as Co-PI.</li>
-            <li><strong>Oct. 2025:</strong> Senior PC Member for ICWSM 2026 (September submissions)</li>
-            <li><strong>June 2025:</strong> PC Member for AIES 2025 and ICWSM 2026 (May submissions)</li>
-            <li><strong>Mar. 2025: </strong> FIRP grant worth INR 10 Lakh received from DTU as Co-PI</li>
-            <li><strong>Jan. 2025: </strong> Participated in Google DeepMind Research Symposium at Bengaluru, India</li>
-            <li><strong>Aug. 2024: </strong> LaMSUM research work featured on <a href = "https://www.aimodels.fyi/papers/arxiv/lamsum-creating-extractive-summaries-user-generated-content">AI models website</a></li>
-            <li><strong>Aug. 2024: </strong> Talk for DANICS Officers at DTU, New Delhi, India</li>
-            <li><strong>June 2024: </strong> Spotlight Talk at ICWSM, Buffalo, New York, USA</li>
-            <li><strong>Oct. 2023: </strong> Talk at AI-ML COMSNET, Bengaluru, India</li>
-            <li><strong>Jul. 2023: </strong> Poster Presentation at SIGIR, Taipei, Taiwan</li>
-            <li><strong>Jul. 2023: </strong> Student Volunteer at SIGIR</li>
-            <li><strong>Dec. 2022: </strong> Poster Presentation at IndoML, IIT Gandhinagar, India</li>
-            </ul>
+<!-- ================= PUBLICATIONS ================= -->
+<section id="publications">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Publications &amp; CV</h2>
+      <span class="coord">ARCHIVE</span>
+    </div>
 
-            </div>
-        </div> -->
-        <br>
-
-<br>
-    
-
-<div class="posts-wrapper" style="clear:both">
-    <h3 id="gotopubs" style="margin-top:0em;margin-bottom:0.5em;">Certificates</h3>
-    <ul style="list-style-type: square;">
-
-        <li>
-            <!-- <a href="https://arxiv.org/abs/2508.17735">SMITE: Enhancing Fairness in LLMs through Optimal In-Context Example Selection via Dynamic Validation</a><br> -->
-            <span>January 2026: <i>AI for Social Good</i> by Microsoft</a></span><br>
-        </li>
-        
-        <li>
-            <span>January 2026: <i>Climate Change</i> IIT Hyderabad</a></span><br>
-        </li> 
-</ul>
-</div>
-
-
-
-<div class="posts-wrapper" style="clear:both">
-    <h3 id="gotopubs" style="margin-top:1.5em;margin-bottom:0.5em;">Projects</h3>
-    <ul class="pubs">
-
+    <ul class="pub-list">
+      <!-- EDIT: replace with your real publications -->
       <li>
-        <i>Virtual System for Tactical Command Theatre</i><br>
-        <ul  style="list-style-type: square;"> 
-            <li> Developed a simulation platform for tactical mission planning and analysis  using Unity.<br></li>
-            <li> Integrated ArcGIS maps for real-world geographic visualization.<br></li>
-            <li> Received track and resource data from the Tactical Command Theatre Simulator.<br></li>
-            <li> Processed and displayed track movement and resource positions in the system.<br></li>
-
-        </ul>
+        <span class="pub-year">2025</span>
+        <span class="pub-text"><strong>Your Name</strong>, "Paper title here," <em>Journal / Conference Name</em>.</span>
       </li>
-
-
       <li>
-  <i>VR-Based Training Simulator for Radar Operators</i><br>
-  <ul style="list-style-type: square;">
-    <li>Built a virtual reality–based training system using Unity and C#.<br></li>
-    <li>Created interactive radar operation scenarios in a fully immersive virtual environment.<br></li>
-    <li>Designed training and maintenance modules to help operators understand radar functions and perform corrective actions.<br></li>
-    <li>Provided a safe and controlled setup for practice and skill development.<br></li>
-  </ul>
-</li>
+        <span class="pub-year">2024</span>
+        <span class="pub-text"><strong>Your Name</strong>, "Another paper title," <em>Journal / Conference Name</em>.</span>
+      </li>
+      <li>
+        <span class="pub-year">2024</span>
+        <span class="pub-text">"Thesis or preprint title," B.Tech/M.Tech thesis, Your University.</span>
+      </li>
+    </ul>
 
-<li>
-  <i>Indigenous Communication-Based Train Control System (i-CBTC)</i><br>
-  <ul style="list-style-type: square;">
-    <li>Developed a train simulator for Automatic Train Control (ATC).<br></li>
-    <li>Developed a GUI-based application for interacting with hardware loggers.<br></li>
-  </ul>
-</li>
+    <a class="cv-download" href="cv.pdf" target="_blank">Download CV (PDF)</a>
+  </div>
+</section>
 
-<li>
-  <i>Rolling Stock Driver Training System</i><br>
-  <ul style="list-style-type: square;">
-    <li>Developed the simulation engine, signaling system, and Automatic Decision System (ADS).<br></li>
-    <li>Simulated real-world train malfunctions using a dedicated malfunction handler module.<br></li>
-    <li>Implemented training assessment and evaluation modules for examining train operators during training.<br></li>
-    <li>Coordinated with sensor integration, display, database development teams, and DMRC project executives to introduce design changes as per project timelines.<br></li>
-  </ul>
-</li>
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Contact</h2>
+      <span class="coord">GET IN TOUCH</span>
+    </div>
 
-<li>
-  <i>Integrated Air Command and Control System</i><br>
-  <ul style="list-style-type: square;">
-    <li>Developed a GUI-based weapon simulator for the Indian Air Force.<br></li>
-    <li>Simulated 100+ sending messages and 50+ receiving messages for each missile system type.<br></li>
-    <li>Configured missile systems with default data using easily manageable XML files.<br></li>
-    <li>Implemented a message logger system with hex-to-decimal and decimal-to-hex data conversion.<br></li>
-    <li>Developed a common reusable library using the NetBeans IDE.<br></li>
-    <li>Designed the system to be easily extendable for integrating new missile systems.<br></li>
-  </ul>
-</li>
+    <p class="lead-para">
+      I'm currently applying for PhD positions in GIS and spatial simulation for Fall/Spring intake.
+      Feel free to reach out if you're looking for a student or collaborator.
+    </p>
 
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="coord">EMAIL</span>
+        <a href="mailto:you@example.com">you@example.com</a>
+      </div>
+      <div class="contact-item">
+        <span class="coord">LINKEDIN</span>
+        <a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">linkedin.com/in/yourname</a>
+      </div>
+      <div class="contact-item">
+        <span class="coord">GITHUB</span>
+        <a href="https://github.com/yourusername" target="_blank" rel="noopener">github.com/yourusername</a>
+      </div>
+      <div class="contact-item">
+        <span class="coord">LOCATION</span>
+        <span>City, Country</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-       
-</ul>
-</div>
+<footer>
+  <span class="coord">Built with GIS coordinates and stubbornness — © <span id="year"></span> Your Name</span>
+</footer>
 
+<script>
+/* ---------------- Tabs ---------------- */
+const tabs = document.querySelectorAll('nav.tabs button');
+const sections = document.querySelectorAll('section');
 
-
-
-
-        <div class="posts-wrapper" style="clear:both">
-            <h3 id="gotopubs" style="margin-top:1.5em;margin-bottom:0.5em;">publications</h3>
-            <ul  style="list-style-type: square;" >
-
-                <!-- <li>
-                    <a href="https://arxiv.org/abs/2406.15809">ECC based certificateless aggregate signature scheme for healthcare wireless sensor networks</a><br>
-                    <b>Lalit Negi</b>, Devender Kumar<br>-->
-                    <!-- <i>In 20th International AAAI Conference on Web and Social Media (<b>ICWSM</b>), Los Angeles, California, USA, June 2026.</i><br>
-                    <h2><a href="papers/LLM_Summarization.pdf">pdf</a> // <a href="javascript:unhide('chhikara24summarization');" class="bibtex">bibtex</a></h2>
-                    <div id="chhikara24summarization" class="hidden">
-                    <pre>
-@misc{chhikara2024lamsum,
-    title={LaMSUM: Amplifying Voices Against Harassment through LLM Guided Extractive Summarization of User Incident Reports}, 
-    author={Garima Chhikara and Anurag Sharma and V. Gurucharan and Kripabandhu Ghosh and Abhijnan Chakraborty},
-    year={2025},
-    eprint={2406.15809},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL},
-    url={https://arxiv.org/abs/2406.15809}, 
+function showTab(id){
+  sections.forEach(s => s.classList.toggle('active', s.id === id));
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === id));
+  window.scrollTo({top:0, behavior:'smooth'});
 }
-                </pre>
-                </div> 
-                </li> -->
+tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
 
-                    <li><a href="https://ipecjst.ipec.org.in/assets/doc/2025/aug/IPECJST-5.pdf"> Secure Satellite Image Encryption using Arnold Cat Map Scrambling with Elliptic Curve-Based Block Encryption</a></li>
-                    <li><a href="https://link.springer.com/article/10.1007/s40860-024-00236-w">ECC based certificateless aggregate signature scheme for healthcare wireless sensor networks</a><br></li>          
-                    <li><a href="https://link.springer.com/article/10.1007/s11277-024-10962-2">A Bilinear Mapping Based Ring Signature Scheme with Batch Verification for Applications in VANETs</a><br></li>
-                    <li><a href="https://ieeexplore.ieee.org/abstract/document/9664834/">Image Steganography Using Steg with AES and LSB</a><br></li>
-                    <li><a href="https://ieeexplore.ieee.org/abstract/document/9489260/">Hybrid approach for Data Security using Coverless Image Steganography with AES</a><br></li>
-                    <li><a href="https://link.springer.com/chapter/10.1007/978-981-19-1142-2_66">Overview of Security Approaches Using Metamorphic Cryptography</a><br></li>
-                    <li><a href="https://ieeexplore.ieee.org/abstract/document/9633639/">Hindi Text Encryption using Double Transposition and Elgamal</a><br></li>
+document.getElementById('year').textContent = new Date().getFullYear();
 
+/* ---------------- Simple placeholder "photo" generator (SVG) ---------------- */
+/* Replace these with <img src="images/yourphoto.jpg"> once you have real pictures. */
+function placeholderSVG(seedColor, label){
+  return `<svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+    <rect width="300" height="180" fill="${seedColor}"/>
+    <g opacity="0.35" stroke="#20281f" stroke-width="1" fill="none">
+      <path d="M-10,40 C60,20 140,60 220,30 C260,15 300,35 320,25"/>
+      <path d="M-10,80 C70,60 150,100 230,70 C270,55 300,75 320,65"/>
+      <path d="M-10,120 C80,100 160,140 240,110 C280,95 300,115 320,105"/>
+    </g>
+    <text x="16" y="160" font-family="IBM Plex Mono" font-size="12" fill="#20281f">${label}</text>
+  </svg>`;
+}
 
+/* ---------------- Project data ---------------- */
+/* EDIT: replace title/role/description/tags with your real projects.
+   For thumb/gallery colors, pick any hex; for gallery length, 2-4 images looks best.
+   Once you have real photos, swap placeholderSVG(...) calls for:
+   '<img src="images/project1-1.jpg" alt="...">' */
+const projects = [
+  {
+    id: 'p1',
+    coord: 'PROJ 01 — 2025',
+    title: 'Urban Growth Simulation, Delhi NCR',
+    role: 'Cellular automata + Markov chain model',
+    thumbColor: '#C9D6C2',
+    galleryColors: ['#C9D6C2', '#B7C7B0', '#DCE3D4'],
+    description: `A cellular-automata model calibrated on 20 years of Landsat land-cover classification to
+      project urban expansion in the Delhi NCR region to 2040. Combines a Markov transition matrix with
+      distance-to-road and slope constraints, validated against a held-out decade of imagery.`,
+    tags: ['Python', 'GDAL', 'Landsat', 'CA-Markov']
+  },
+  {
+    id: 'p2',
+    coord: 'PROJ 02 — 2024',
+    title: 'Agent-Based Flood Evacuation Model',
+    role: 'NetLogo / Mesa agent-based simulation',
+    thumbColor: '#BFD1DE',
+    galleryColors: ['#BFD1DE', '#AEC3D3', '#D2E0E9'],
+    description: `An agent-based model simulating household evacuation behavior during river flooding,
+      built on a road network extracted from OpenStreetMap. Explores how warning-time and road-capacity
+      assumptions change evacuation-completion curves.`,
+    tags: ['Mesa', 'NetworkX', 'OSMnx', 'ABM']
+  },
+  {
+    id: 'p3',
+    coord: 'PROJ 03 — 2024',
+    title: 'Watershed Runoff & DEM Analysis',
+    role: 'Hydrological terrain modeling',
+    thumbColor: '#E3D2B8',
+    galleryColors: ['#E3D2B8', '#D8C3A2', '#EEE0C7'],
+    description: `Terrain-driven runoff estimation using SRTM DEM data — flow direction, flow accumulation,
+      and watershed delineation feeding into a simple SCS curve-number rainfall-runoff model, benchmarked
+      against gauge station data.`,
+    tags: ['QGIS', 'SAGA GIS', 'DEM', 'Hydrology']
+  },
+  {
+    id: 'p4',
+    coord: 'PROJ 04 — 2023',
+    title: 'Mobility Pattern Clustering',
+    role: 'Spatial data mining',
+    thumbColor: '#E8C8BE',
+    galleryColors: ['#E8C8BE', '#DDB6A9', '#F0D8CF'],
+    description: `Clustering anonymized GPS trip data to identify recurring commuter corridors, using
+      DBSCAN on trajectory segments and a custom spatial-similarity metric. Visualized as an interactive
+      flow map.`,
+    tags: ['scikit-learn', 'DBSCAN', 'Kepler.gl']
+  }
+];
 
-
-<!-- 
-                <li>
-                    <a href="https://ipecjst.ipec.org.in/assets/doc/2025/aug/IPECJST-5.pdf"> Secure Satellite Image Encryption using Arnold Cat Map Scrambling with Elliptic Curve-Based Block Encryption</a>
-                </li>
-                <li>
-                    <a href="https://link.springer.com/article/10.1007/s40860-024-00236-w">ECC based certificateless aggregate signature scheme for healthcare wireless sensor networks</a><br>
-                    <b>Lalit Negi</b>, Devender Kumar<br>
-                </li>
-                <li>
-                    <a href="https://link.springer.com/article/10.1007/s11277-024-10962-2">A Bilinear Mapping Based Ring Signature Scheme with Batch Verification for Applications in VANETs</a><br>
-                     <b>Lalit Negi</b>, Devender Kumar<br>
-                </li>
-                <li>
-                    <a href="https://ieeexplore.ieee.org/abstract/document/9664834/">Image Steganography Using Steg with AES and LSB</a><br>
-                     <b>Lalit Negi</b>, Lokesh Negi<br> 
-                </li>
-                <li>
-                    <a href="https://ieeexplore.ieee.org/abstract/document/9489260/">Hybrid approach for Data Security using Coverless Image Steganography with AES</a><br>
-                     <b>Lalit Negi</b>, Lokesh Negi<br> 
-                </li>   
-                <li>
-                    <a href="https://link.springer.com/chapter/10.1007/978-981-19-1142-2_66">Overview of Security Approaches Using Metamorphic Cryptography</a><br>
-                     <b>Lokesh Negi</b>, Lalit Negi<br> 
-                </li>
-                <li>
-                    <a href="https://ieeexplore.ieee.org/abstract/document/9633639/">Hindi Text Encryption using Double Transposition and Elgamal</a><br>
-                     <b>Lokesh Negi</b>, Lalit Negi<br> 
-                </li> -->
-             
-            </ul>
-        </div>
+const grid = document.getElementById('project-grid');
+projects.forEach(p => {
+  const card = document.createElement('button');
+  card.className = 'project-card';
+  card.innerHTML = `
+    <div class="project-thumb">${placeholderSVG(p.thumbColor, p.coord)}</div>
+    <div class="project-body">
+      <span class="coord">${p.coord}</span>
+      <h3>${p.title}</h3>
+      <p>${p.role}</p>
     </div>
+  `;
+  card.addEventListener('click', () => openModal(p));
+  grid.appendChild(card);
+});
 
-    <div id="footer">
-        <!-- Default Statcounter code for My Webpage
-    https://garimachhikara128.github.io/ -->
-    <script type="text/javascript">
-        var sc_project=12848020; 
-        var sc_invisible=0; 
-        var sc_security="9017ca72"; 
-        var scJsHost = "https://";
-        document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+
-        "statcounter.com/counter/counter.js'></"+"script>");
-    </script>
-        <noscript><div class="statcounter"><a title="Web Analytics"
-        href="https://statcounter.com/" target="_blank"><img class="statcounter"
-        src="https://c.statcounter.com/12848020/0/9017ca72/0/" alt="Web Analytics"
-        referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-        <!-- End of Statcounter Code -->
-    </div>
+/* ---------------- Modal logic ---------------- */
+const overlay = document.getElementById('modal-overlay');
+function openModal(p){
+  document.getElementById('modal-coord').textContent = p.coord;
+  document.getElementById('modal-title').textContent = p.title;
+  document.getElementById('modal-role').textContent = p.role;
+  document.getElementById('modal-desc').textContent = p.description;
+
+  const gallery = document.getElementById('modal-gallery');
+  gallery.innerHTML = p.galleryColors.map((c,i) => placeholderSVG(c, `IMG ${i+1}`)).join('');
+
+  const tagRow = document.getElementById('modal-tags');
+  tagRow.innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+  overlay.classList.add('open');
+}
+document.getElementById('modal-close').addEventListener('click', () => overlay.classList.remove('open'));
+overlay.addEventListener('click', (e) => { if(e.target === overlay) overlay.classList.remove('open'); });
+document.addEventListener('keydown', (e) => { if(e.key === 'Escape') overlay.classList.remove('open'); });
+</script>
 
 </body>
-
 </html>
-
-
-
