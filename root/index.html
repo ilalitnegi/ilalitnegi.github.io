@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lalit Negi</title>
-<meta name="description" content="Looking for PhD Positions. Research interests, projects, and contact.">
+<meta name="description" content="Looking for PhD   s. Research interests, projects, and contact.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,6 +51,11 @@
     font-size:0.78rem;
     color:var(--ink-soft);
     letter-spacing:0.02em;
+  }
+
+  .researchwrap{
+  padding-left:0;
+  padding-right:0;
   }
 
   .wrap{
@@ -182,9 +187,19 @@
     font-size:1.05rem;
     max-width:66ch;
     color:var(--ink);
+    text-align: justify;
+
   }
   .lead-para + .lead-para{ margin-top:1em; }
 
+
+    .researchlead-para{
+    font-size:1.05rem;
+    max-width:100ch;
+    color:var(--ink);
+    text-align: justify;
+
+  }
   .interest-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
@@ -207,7 +222,7 @@
     grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
     gap:20px;
   }
-  .project-card{
+  /* .project-card{
     background:var(--card-bg);
     border:1px solid var(--line);
     border-radius:4px;
@@ -217,17 +232,78 @@
     padding:0;
     font-family:inherit;
     transition:transform 0.15s ease, box-shadow 0.15s ease;
-  }
+  }  */
   .project-card:hover{
     transform:translateY(-3px);
     box-shadow:0 10px 24px rgba(32,43,36,0.12);
   }
-  .project-thumb{
+  /* .project-thumb{
     width:100%;
     height:150px;
     display:block;
-  }
-  .project-body{ padding:18px 20px 20px; }
+  } */
+/* 
+  .project-thumb{
+  width:100%;
+  height:150px;
+  display:block;
+  object-fit:cover;
+  background:var(--paper-dim);
+} */
+/* .project-thumb{
+  width:100%;
+  height:180px;
+  display:block;
+  object-fit:cover;
+  background:var(--paper-dim);
+  transition:transform 0.25s ease;
+} */
+
+.project-card{
+  background:var(--card-bg);
+  border:1px solid var(--line);
+  border-radius:4px;
+  overflow:hidden;
+  cursor:pointer;
+  text-align:left;
+  padding:0;
+  margin:0;
+  font-family:inherit;
+
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:flex-start;
+
+  appearance:none;
+  -webkit-appearance:none;
+
+  transition:transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.project-thumb{
+  width:100%;
+  height:180px;
+  display:block;
+  flex-shrink:0;
+  margin:0;
+  padding:0;
+  border:0;
+  object-fit:cover;
+  object-position:center;
+  background:var(--paper-dim);
+}
+
+.project-body{
+  padding:18px 20px 20px;
+  flex:1;
+}
+
+
+
+
+
+  /* .project-body{ padding:18px 20px 20px; } */
   .project-body .coord{ margin-bottom:6px; }
   .project-body h3{ font-size:1.1rem; margin-bottom:6px; }
   .project-body p{ margin:0; color:var(--ink-soft); font-size:0.92rem; }
@@ -254,7 +330,7 @@
     z-index:100;
   }
   .modal-overlay.open{ display:flex; }
-  .modal{
+  /* .modal{
     background:var(--paper);
     max-width:720px;
     width:100%;
@@ -262,7 +338,17 @@
     padding:36px;
     position:relative;
     animation:rise 0.18s ease;
-  }
+  } */
+
+  .modal{
+  background:var(--paper);
+  max-width:900px;
+  width:100%;
+  border-radius:6px;
+  padding:36px;
+  position:relative;
+  animation:rise 0.18s ease;
+}
   @keyframes rise{
     from{ opacity:0; transform:translateY(10px); }
     to{ opacity:1; transform:translateY(0); }
@@ -282,12 +368,41 @@
   .modal .coord{ margin-bottom:10px; }
   .modal h3{ font-size:1.5rem; margin-bottom:4px; }
   .modal .role-line{ color:var(--contour); font-weight:500; margin-bottom:18px; font-size:0.95rem; }
-  .modal-gallery{
+  /* .modal-gallery{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:10px;
     margin:20px 0;
-  }
+  } */
+   /* .modal-gallery img{
+  width:100%;
+  height:180px;
+  border-radius:4px;
+  display:block;
+  object-fit:cover;
+  background:var(--paper-dim);
+} */
+
+.modal-gallery{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:14px;
+  margin:20px 0;
+}
+
+.modal-gallery img{
+  width:100%;
+  height:auto;
+  max-height:400px;
+  display:block;
+  object-fit:contain;
+  object-position:center;
+  background:var(--paper-dim);
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:6px;
+}
+
   .modal-gallery svg{ width:100%; height:120px; border-radius:4px; display:block; }
   .modal p{ color:var(--ink); font-size:0.98rem; }
   .modal .tag-row{ margin-top:18px; }
@@ -336,14 +451,44 @@
   }
   footer .coord{ opacity:0.7; }
 
-  @media (max-width:600px){
+  /* @media (max-width:600px){
     nav.tabs{ width:100%; justify-content:flex-start; overflow-x:auto; }
     .nav-inner{ flex-direction:column; align-items:flex-start; }
     .section-head{ flex-wrap:wrap; }
     .modal{ padding:26px; }
     .modal-gallery{ grid-template-columns:1fr; }
+  } */
+
+
+  @media (max-width:600px){
+  nav.tabs{
+    width:100%;
+    justify-content:flex-start;
+    overflow-x:auto;
   }
 
+  .nav-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .section-head{
+    flex-wrap:wrap;
+  }
+
+  .modal{
+    padding:26px;
+  }
+
+  .modal-gallery{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .modal-gallery img{
+    max-height:none;
+  }
+}
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
   }
@@ -380,7 +525,7 @@
   </svg>
 
   <div class="wrap hero-inner">
-    <span class="coord">LOOKING FOR PHD POSITION IN GIS &amp; SIMULATION</span>
+    <span class="coord">LOOKING FOR PHD POSITIONS IN GIS &amp; SIMULATION</span>
     <h1>Lalit Negi</h1>
     <!-- <div class="role">Modeling how places change — geospatial analysis, agent-based &amp; cellular-automata simulation</div> -->
 
@@ -388,7 +533,7 @@
 
     <p class="lede">
       <!-- EDIT: 2-3 sentence bio -->
-      I'm a researcher looking for a PhD position where I can combine GIS-based spatial analysis
+      I'm a researcher looking for a PhD positions where I can combine GIS-based spatial analysis
       with simulation — land-use change, urban growth, hydrology, or mobility — to answer questions
       that matter for how people and environments interact over time.
     </p>
@@ -405,44 +550,68 @@
 <section id="research">
   <div class="wrap">
     <div class="section-head">
-      <h2>Research interests</h2>
+      <h2>Research Interests</h2>
       <span class="coord">FIELD NOTES</span>
     </div>
 
-    <p class="lead-para">
+    <p class="researchlead-para">
       <!-- EDIT -->
-      My work sits at the intersection of geographic information science and computational simulation.
-      I'm interested in how spatial data — remote sensing, vector/raster layers, sensor and mobility traces —
-      can drive dynamic models that forecast or explain change across landscapes and cities.
+       My primary research interests lie at the intersection of Geographic Information Systems (GIS), simulation, Machine Learning (ML) and Augmented/Virtual Reality (AR/VR). I am particularly interested in geospatial modeling and simulation, 3D GIS, immersive geospatial visualization, spatial analysis, and the integration of GIS with AR/VR technologies for interactive and realistic representations of complex environments. I am also interested in exploring how simulation and immersive technologies can support applications such as spatial decision-making, urban and environmental modeling, digital twins, and interactive geospatial systems. Previously, I have also worked in Applied Cryptography and Information Security, which has given me a background in secure systems and data protection.
     </p>
-    <p class="lead-para">
+    <p class="researchlead-para">
       I'm applying to PhD programs where I can develop this further, ideally with a group working on
-      urban growth modeling, hydrological or environmental simulation, or agent-based approaches to
-      human-environment systems.
+      GIS or environmental simulation, or ML agent-based approaches to human-environment systems.
     </p>
 
-    <div class="interest-grid">
+    <!-- <div class="interest-grid">
       <div class="interest-card">
-        <span class="coord">01 — LAND USE</span>
+        <span class="coord">01 — Geographic Information System</span>
         <h3>Land-use & land-cover change</h3>
         <p>Cellular automata and Markov-chain models to project urban expansion and land-cover transitions.</p>
       </div>
       <div class="interest-card">
-        <span class="coord">02 — AGENT-BASED</span>
+        <span class="coord">02 — Augmented &amp; Virtual Reality</span>
         <h3>Agent-based simulation</h3>
         <p>Simulating individual movement and decision-making over geospatial networks (mobility, evacuation, migration).</p>
       </div>
       <div class="interest-card">
-        <span class="coord">03 — REMOTE SENSING</span>
+        <span class="coord">03 — Machine Learning</span>
         <h3>Remote sensing &amp; GIS</h3>
         <p>Satellite imagery classification and spatial analysis pipelines feeding directly into simulation inputs.</p>
       </div>
       <div class="interest-card">
-        <span class="coord">04 — HYDROLOGY</span>
+        <span class="coord">04 — Applied Cryptography</span>
         <h3>Environmental &amp; hydrological modeling</h3>
         <p>Coupling terrain data (DEMs) with hydrological or climate-impact simulations at watershed scale.</p>
       </div>
-    </div>
+    </div> -->
+
+
+  <div class="interest-grid">
+  <div class="interest-card">
+    <span class="coord">01 — Geographic Information System</span>
+    <h3>3D GIS &amp; Geospatial Modeling</h3>
+    <p>Developing spatial models and 3D geospatial representations for understanding, analyzing, and simulating complex real-world environments.</p>
+  </div>
+
+  <div class="interest-card">
+    <span class="coord">02 — Augmented &amp; Virtual Reality</span>
+    <h3>Immersive Geospatial Visualization</h3>
+    <p>Integrating GIS with AR/VR to create interactive and immersive environments for exploring spatial data, simulations, and real-world scenarios.</p>
+  </div>
+
+  <div class="interest-card">
+    <span class="coord">03 — Machine Learning</span>
+    <h3>Geospatial AI &amp; Remote Sensing</h3>
+    <p>Applying machine learning to satellite imagery, spatial datasets, and remote sensing for geospatial analysis, prediction, and simulation.</p>
+  </div>
+
+  <div class="interest-card">
+    <span class="coord">04 — Applied Cryptography</span>
+    <h3>Security &amp; Privacy</h3>
+    <p>Securing data in healthcare wireless sensor networks   and VANET, cryptography, image steganography and metamorphic cryptography. </p>
+  </div>
+</div>
   </div>
 </section>
 
@@ -483,16 +652,40 @@
       <!-- EDIT: replace with your real publications -->
       <li>
         <span class="pub-year">2025</span>
-        <span class="pub-text"><strong>Your Name</strong>, "Paper title here," <em>Journal / Conference Name</em>.</span>
+        <span class="pub-text"><strong>Lalit Negi</strong>, "Secure Satellite Image Encryption using Arnold Cat Map Scrambling with Elliptic Curve-Based Block Encryption," <em>IPEC Journal of Science & Technology, IPEC</em>.</span>
       </li>
       <li>
         <span class="pub-year">2024</span>
-        <span class="pub-text"><strong>Your Name</strong>, "Another paper title," <em>Journal / Conference Name</em>.</span>
+        <span class="pub-text"><strong>Lalit Negi</strong> &amp; Sandeep Kumar, "Quantum Approaches to CICO Problems-A Survey of Current Solutions and Future Research Directions," <em>Authorea Preprints, Authorea</em>.</span>
       </li>
       <li>
+        <span class="pub-year">2024</span>
+        <span class="pub-text"><strong>Lalit Negi</strong> &amp; Devender Kumar, "ECC based certificateless aggregate signature scheme for healthcare wireless sensor networks," <em>Journal of Reliable Intelligent Environments, Springer International Publishing</em>.</span>
+      </li>
+      <li>
+        <span class="pub-year">2024</span>
+        <span class="pub-text"><strong>Lalit Negi</strong> &amp; Devender Kumar, "A Bilinear Mapping Based Ring Signature Scheme with Batch Verification for Applications in VANETs," <em>Wireless Personal Communications, Springer US</em>.</span>
+      </li>
+      <li>
+        <span class="pub-year">2022</span>
+        <span class="pub-text">Lokesh Negi &amp; <strong>Lalit Negi</strong>, "Overview of Security Approaches Using Metamorphic Cryptography," <em>Proceedings of Third International Conference on Computing, Communications, and Cyber-Security: IC4S, Springer Nature Singapore</em>.</span>
+      </li>
+      <li>
+        <span class="pub-year">2022</span>
+        <span class="pub-text">Lokesh Negi &amp; <strong>Lalit Negi</strong>, "Hindi Text Encryption using Double Transposition and Elgamal," <em>International Conference on Recent Developments in Control, Automation & Power Engineering (RDCAPE), IEEE</em>.</span>
+      </li>
+      <li>
+        <span class="pub-year">2021</span>
+        <span class="pub-text"><strong>Lalit Negi</strong> &amp; Lokesh Negi, "Image Steganography Using Steg with AES and LSB," <em> International Conference on Computing, Engineering and Design (ICCED), IEEE</em>.</span>
+      </li>
+      <li>
+        <span class="pub-year">2021</span>
+        <span class="pub-text"><strong>Lalit Negi</strong> &amp; Lokesh Negi, "Hybrid approach for Data Security using Coverless Image Steganography with AES," <em>International Conference on Communication and Electronics Systems (ICCES), IEEE</em>.</span>
+      </li>
+      <!-- <li>
         <span class="pub-year">2024</span>
         <span class="pub-text">"Thesis or preprint title," B.Tech/M.Tech thesis, Your University.</span>
-      </li>
+      </li> -->
     </ul>
 
     <a class="cv-download" href="cv.pdf" target="_blank">Download CV (PDF)</a>
@@ -575,54 +768,142 @@ function placeholderSVG(seedColor, label){
    For thumb/gallery colors, pick any hex; for gallery length, 2-4 images looks best.
    Once you have real photos, swap placeholderSVG(...) calls for:
    '<img src="images/project1-1.jpg" alt="...">' */
+// const projects = [
+//   {
+//     id: 'p1',
+//     coord: 'PROJ 01 — 2025',
+//     title: 'GIS Based Realtime Fire Detection and Anti Fire Simulation Systems',
+//     role: 'Cellular automata + Markov chain model',
+//     thumbColor: '#C9D6C2',
+//     galleryColors: ['#C9D6C2', '#B7C7B0', '#DCE3D4'],
+//     description: `A cellular-automata model calibrated on 20 years of Landsat land-cover classification to
+//       project urban expansion in the Delhi NCR region to 2040. Combines a Markov transition matrix with
+//       distance-to-road and slope constraints, validated against a held-out decade of imagery.`,
+//     tags: ['Python', 'GDAL', 'Landsat', 'CA-Markov']
+//   },
+//   {
+//     id: 'p2',
+//     coord: 'PROJ 02 — 2024',
+//     title: 'Agent-Based Flood Evacuation Model',
+//     role: 'NetLogo / Mesa agent-based simulation',
+//     thumbColor: '#BFD1DE',
+//     galleryColors: ['#BFD1DE', '#AEC3D3', '#D2E0E9'],
+//     description: `An agent-based model simulating household evacuation behavior during river flooding,
+//       built on a road network extracted from OpenStreetMap. Explores how warning-time and road-capacity
+//       assumptions change evacuation-completion curves.`,
+//     tags: ['Mesa', 'NetworkX', 'OSMnx', 'ABM']
+//   },
+//   {
+//     id: 'p3',
+//     coord: 'PROJ 03 — 2024',
+//     title: 'Watershed Runoff & DEM Analysis',
+//     role: 'Hydrological terrain modeling',
+//     thumbColor: '#E3D2B8',
+//     galleryColors: ['#E3D2B8', '#D8C3A2', '#EEE0C7'],
+//     description: `Terrain-driven runoff estimation using SRTM DEM data — flow direction, flow accumulation,
+//       and watershed delineation feeding into a simple SCS curve-number rainfall-runoff model, benchmarked
+//       against gauge station data.`,
+//     tags: ['QGIS', 'SAGA GIS', 'DEM', 'Hydrology']
+//   },
+//   {
+//     id: 'p4',
+//     coord: 'PROJ 04 — 2023',
+//     title: 'Mobility Pattern Clustering',
+//     role: 'Spatial data mining',
+//     thumbColor: '#E8C8BE',
+//     galleryColors: ['#E8C8BE', '#DDB6A9', '#F0D8CF'],
+//     description: `Clustering anonymized GPS trip data to identify recurring commuter corridors, using
+//       DBSCAN on trajectory segments and a custom spatial-similarity metric. Visualized as an interactive
+//       flow map.`,
+//     tags: ['scikit-learn', 'DBSCAN', 'Kepler.gl']
+//   }
+// ];
+
 const projects = [
   {
-    id: 'p1',
-    coord: 'PROJ 01 — 2025',
-    title: 'Urban Growth Simulation, Delhi NCR',
-    role: 'Cellular automata + Markov chain model',
-    thumbColor: '#C9D6C2',
-    galleryColors: ['#C9D6C2', '#B7C7B0', '#DCE3D4'],
-    description: `A cellular-automata model calibrated on 20 years of Landsat land-cover classification to
-      project urban expansion in the Delhi NCR region to 2040. Combines a Markov transition matrix with
-      distance-to-road and slope constraints, validated against a held-out decade of imagery.`,
-    tags: ['Python', 'GDAL', 'Landsat', 'CA-Markov']
+    coord: 'PROJ 01 — 2026',
+    title: 'Geogrpahic Information System-Based Real-Time Fire Detection and Anti-Fire Simulation System',
+    role: 'GIS + Real-Time Simulation',
+
+    thumb: 'images/fire-detection-1.png',
+
+    gallery: [
+      'images/fire-detection-1.png',
+      'images/fire-detection-2.png',
+      // 'images/fire-detection-3.png'
+    ],
+
+    description: `A GIS-based system for real-time fire detection, spatial visualization, and fire-spread simulation. Integrates geospatial data, real-time information, and simulation models to support fire monitoring, prediction, and emergency response planning.`,
+
+    tags: ['GIS', 'Web', 'MapLibre', 'Simulation', 'Real-Time Systems']
   },
+
+  // {
+  //   coord: 'PROJ 02 — 2026',
+  //   title: 'Real-Time Spatiotemporal Framework for 4D Digital Twin Modelling of Linear Infrastructure',
+  //   role: '4D Digital Twins + Spatiotemporal Simulation',
+
+  //   thumb: 'images/digital-twin-1.jpg',
+
+  //   gallery: [
+  //     'images/digital-twin-1.jpg',
+  //     'images/digital-twin-2.jpg'
+  //   ],
+
+  //   description: `A real-time spatiotemporal framework for developing 4D digital twins of linear infrastructure. Combines geospatial, temporal, and infrastructure data to support dynamic visualization, monitoring, and simulation of infrastructure assets.`,
+
+  //   tags: ['GIS', 'ArcGIS', 'Digital Twin', '4D Modeling', 'Simulation']
+  // },
+
   {
-    id: 'p2',
-    coord: 'PROJ 02 — 2024',
-    title: 'Agent-Based Flood Evacuation Model',
-    role: 'NetLogo / Mesa agent-based simulation',
-    thumbColor: '#BFD1DE',
-    galleryColors: ['#BFD1DE', '#AEC3D3', '#D2E0E9'],
-    description: `An agent-based model simulating household evacuation behavior during river flooding,
-      built on a road network extracted from OpenStreetMap. Explores how warning-time and road-capacity
-      assumptions change evacuation-completion curves.`,
-    tags: ['Mesa', 'NetworkX', 'OSMnx', 'ABM']
+    coord: 'PROJ 02 — 2025',
+    title: 'Interactive Radar Fault Management Training System with GIS-Based Visualization and Corrective Action Guidance',
+    role: 'GIS + Interactive Simulation',
+
+    thumb: 'images/radar-training-1.png',
+
+    gallery: [
+      'images/radar-training-1.png',
+      'images/radar-training-2.png'
+    ],
+
+    description: `An interactive training system that integrates GIS-based visualization with radar fault scenarios and corrective-action guidance. Designed to provide an immersive and interactive environment for fault identification, decision-making, and technical training.`,
+
+    tags: ['GIS', 'Qt', 'C++', 'Visualization', 'Simulation', 'Training System']
   },
+
+  // {
+  //   coord: 'PROJ 04 — 2025',
+  //   title: 'Interactive Object Detection and Layer-Based Image Annotation Platform',
+  //   role: 'Computer Vision + Geospatial Visualization',
+
+  //   thumb: 'images/object-detection-1.jpg',
+
+  //   gallery: [
+  //     'images/object-detection-1.jpg',
+  //     'images/object-detection-2.jpg'
+  //   ],
+
+  //   description: `An interactive platform for object detection and layer-based image annotation. Supports visual analysis and structured annotation of detected objects, providing a foundation for integrating computer vision outputs with spatial visualization workflows.`,
+
+  //   tags: ['Computer Vision', 'Object Detection', 'Image Annotation', 'Python']
+  // },
+
   {
-    id: 'p3',
-    coord: 'PROJ 03 — 2024',
-    title: 'Watershed Runoff & DEM Analysis',
-    role: 'Hydrological terrain modeling',
-    thumbColor: '#E3D2B8',
-    galleryColors: ['#E3D2B8', '#D8C3A2', '#EEE0C7'],
-    description: `Terrain-driven runoff estimation using SRTM DEM data — flow direction, flow accumulation,
-      and watershed delineation feeding into a simple SCS curve-number rainfall-runoff model, benchmarked
-      against gauge station data.`,
-    tags: ['QGIS', 'SAGA GIS', 'DEM', 'Hydrology']
-  },
-  {
-    id: 'p4',
-    coord: 'PROJ 04 — 2023',
-    title: 'Mobility Pattern Clustering',
-    role: 'Spatial data mining',
-    thumbColor: '#E8C8BE',
-    galleryColors: ['#E8C8BE', '#DDB6A9', '#F0D8CF'],
-    description: `Clustering anonymized GPS trip data to identify recurring commuter corridors, using
-      DBSCAN on trajectory segments and a custom spatial-similarity metric. Visualized as an interactive
-      flow map.`,
-    tags: ['scikit-learn', 'DBSCAN', 'Kepler.gl']
+    coord: 'PROJ 03 — 2025',
+    title: 'Immersive Virtual Reality Visualization of Machine Learning-Based Weather Classification for Climate Scenario Analysis',
+    role: 'VR + Machine Learning + Climate Visualization',
+
+    thumb: 'images/vr-weather-1.png',
+
+    gallery: [
+      'images/vr-weather-1.png',
+      'images/vr-weather-2.png'
+    ],
+
+    description: `An immersive virtual reality environment for visualizing machine-learning-based weather classification results and exploring climate scenarios. Combines VR, geospatial visualization, and machine learning to provide an interactive approach to understanding complex weather and climate data.`,
+
+    tags: ['Virtual Reality', 'Machine Learning', 'GIS', 'Climate Modeling']
   }
 ];
 
@@ -630,14 +911,31 @@ const grid = document.getElementById('project-grid');
 projects.forEach(p => {
   const card = document.createElement('button');
   card.className = 'project-card';
+  // card.innerHTML = `
+  //   <div class="project-thumb">${placeholderSVG(p.thumbColor, p.coord)}</div>
+  //   <div class="project-body">
+  //     <span class="coord">${p.coord}</span>
+  //     <h3>${p.title}</h3>
+  //     <p>${p.role}</p>
+  //   </div>
+  // `;
+
   card.innerHTML = `
-    <div class="project-thumb">${placeholderSVG(p.thumbColor, p.coord)}</div>
-    <div class="project-body">
-      <span class="coord">${p.coord}</span>
-      <h3>${p.title}</h3>
-      <p>${p.role}</p>
-    </div>
-  `;
+  <img
+    class="project-thumb"
+    src="${p.thumb}"
+    alt="${p.title}"
+    loading="lazy"
+  >
+
+  <div class="project-body">
+    <span class="coord">${p.coord}</span>
+    <h3>${p.title}</h3>
+    <p>${p.role}</p>
+  </div>
+`;
+
+
   card.addEventListener('click', () => openModal(p));
   grid.appendChild(card);
 });
@@ -651,7 +949,15 @@ function openModal(p){
   document.getElementById('modal-desc').textContent = p.description;
 
   const gallery = document.getElementById('modal-gallery');
-  gallery.innerHTML = p.galleryColors.map((c,i) => placeholderSVG(c, `IMG ${i+1}`)).join('');
+  // gallery.innerHTML = p.galleryColors.map((c,i) => placeholderSVG(c, `IMG ${i+1}`)).join('');
+  gallery.innerHTML = p.gallery.map((image, i) => `
+  <img
+    src="${image}"
+    alt="${p.title} — image ${i + 1}"
+    loading="lazy"
+  >
+`).join('');
+
 
   const tagRow = document.getElementById('modal-tags');
   tagRow.innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
