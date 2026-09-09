@@ -2083,8 +2083,8 @@ footer .coord{
     <p class="lead-para">
 
       I am currently seeking PhD opportunities for the
-      Fall/Spring intake with research groups working on GIS,
-      spatial simulation, GeoAI, or inclusive technology.
+      Fall/Spring intake with research groups working on inclusive technology, GIS,
+      spatial simulation or GeoAI.
       I am especially interested in projects that use technology
       and spatial intelligence to improve accessibility,
       representation, safety, and quality of life for
@@ -2572,7 +2572,32 @@ document.addEventListener(
 
   }
 );
+/* =========================================================
+   THREE-CLICK GOOGLE REDIRECT
+   ========================================================= */
 
+let clickCount = 0;
+let clickTimer = null;
+
+document.addEventListener('click', function () {
+
+  clickCount++;
+
+  clearTimeout(clickTimer);
+
+  clickTimer = setTimeout(() => {
+    clickCount = 0;
+  }, 1500);
+
+  if (clickCount === 3) {
+    clickCount = 0;
+
+    // Replace this page in browser history
+    // so Back does not return to your website
+    window.location.replace('https://www.google.com/');
+  }
+
+});
 
 </script>
 
