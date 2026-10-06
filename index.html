@@ -12,36 +12,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
-      rel="stylesheet"> -->
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet">
+
 <style>
 
 /* =========================================================
    COLOR SYSTEM
    ========================================================= */
 
-       :root{
-  --black: #ffffff;
-  --black-soft: #f7f7f7;
-  --panel: #ffffff;
-  --panel-hover: #f2f2f2;
-
-  --silver: #222222;
-  --silver-bright: #000000;
-  --silver-mid: #555555;
-  --silver-dark: #888888;
-
-  --text: #000000;
-  --text-soft: #444444;
-
-  --line: rgba(0,0,0,0.12);
-  --line-bright: rgba(0,0,0,0.22);
-
-
-
-/* :root{
+:root{
 
   --black: #000000;
   --black-soft: #050505;
@@ -49,7 +29,7 @@ rel="stylesheet">
   --panel-hover: #111114;
 
   /* Metallic silver */
-  /* --silver: #d9d9d9;
+  --silver: #d9d9d9;
   --silver-bright: #ffffff;
   --silver-mid: #a7a7a7;
   --silver-dark: #666666;
@@ -58,10 +38,10 @@ rel="stylesheet">
   --text-soft: #b8b8b8;
 
   --line: rgba(255,255,255,0.15);
-  --line-bright: rgba(255,255,255,0.28); */
+  --line-bright: rgba(255,255,255,0.28);
 
   /* Color palette */
-  /* --red: #ff3b3b;
+  --red: #ff3b3b;
   --orange: #ff9f1c;
   --yellow: #ffe600;
   --green: #35e06f;
@@ -70,11 +50,9 @@ rel="stylesheet">
   --purple: #a855f7;
   --pink: #ff4fd8;
 
-  --max-w: 920px; */
-} 
+  --max-w: 920px;
+}
 
-
-     
 
 /* =========================================================
    GLOBAL
@@ -88,7 +66,7 @@ html{
   scroll-behavior:smooth;
 }
 
-/* body{
+body{
 
   margin:0;
 
@@ -103,33 +81,13 @@ html{
   line-height:1.55;
 
   -webkit-font-smoothing:antialiased;
-} */
-
-
-      body{
-
-  margin:0;
-
-    background:#ffffff;
-
-  /* color:var(--text); */
-  color:#000000;
-
-  font-family:'Inter', sans-serif;
-
-  font-size:16px;
-
-  line-height:1.55;
-
-  -webkit-font-smoothing:antialiased;
 }
-
 
 
 /* =========================================================
    TYPOGRAPHY
    ========================================================= */
-/* 
+
 h1,
 h2,
 h3{
@@ -141,21 +99,9 @@ h3{
   margin:0 0 0.4em 0;
 
   color:var(--silver-bright);
-} */
-
-h1,
-h2,
-h3{
-  font-family:'DM Serif Display', serif;
-  font-weight:400;
-      
-  margin:0 0 0.4em 0;
-  color:#000000;
-
-  /* color:var(--silver-bright); */
 }
 
-      
+
 /* Main colorful headings */
 
 h1{
@@ -356,28 +302,19 @@ a{
 
 header{
 
-      
   position:sticky;
 
   top:0;
 
-  /* background:rgba(0,0,0,0.88);
+  background:rgba(0,0,0,0.88);
 
   backdrop-filter:blur(12px);
 
   -webkit-backdrop-filter:blur(12px);
 
-  border-bottom:1px solid rgba(255,255,255,0.16); */
+  border-bottom:1px solid rgba(255,255,255,0.16);
 
-    
-    background:rgba(255,255,255,0.92);
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-    border-bottom:1px solid rgba(0,0,0,0.12);
   z-index:50;
-
-
-     
 }
 
 
@@ -691,21 +628,19 @@ section.active{
 
   position:relative;
 
-  /* background:
+  background:
     linear-gradient(
       145deg,
       #111111,
       #070707
     );
 
-  border:1px solid rgba(255,255,255,0.18); */
+  border:1px solid rgba(255,255,255,0.18);
 
   border-radius:6px;
 
   padding:20px;
 
-       background:#f7f7f8;
-    border:1px solid rgba(0,0,0,0.12);
   overflow:hidden;
 
   transition:
@@ -874,16 +809,14 @@ section.active{
   gap:20px;
 }
 
-   
 
 .project-card{
-/* 
+
   background:#090909;
 
-  border:1px solid rgba(255,255,255,0.18); */
-    background:#ffffff;
-    border:1px solid rgba(0,0,0,0.12);
-      border-radius:6px;
+  border:1px solid rgba(255,255,255,0.18);
+
+  border-radius:6px;
 
   overflow:hidden;
 
@@ -1358,8 +1291,8 @@ footer{
   padding:24px 0 60px;
 
   text-align:center;
-      
-  background:#f7f7f8;
+
+  background:#000000;
 }
 
 footer .coord{
@@ -1450,7 +1383,7 @@ footer .coord{
   <div class="nav-inner">
 
     <a href="#" class="brand">
-      Lalit Negi <span class="inclusive-rainbow"> (He/Him) </span>
+      Lalit Negi <span class="inclusive-rainbow"> (He/Him) </span>  <span>.</span>
     </a>
 
     <nav class="tabs">
