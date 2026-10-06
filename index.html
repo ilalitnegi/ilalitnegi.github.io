@@ -12,16 +12,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
-      rel="stylesheet">
-
+<!-- <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap"
+rel="stylesheet">
 <style>
 
 /* =========================================================
    COLOR SYSTEM
    ========================================================= */
 
-:root{
+/* :root{
 
   --black: #000000;
   --black-soft: #050505;
@@ -51,8 +52,26 @@
   --pink: #ff4fd8;
 
   --max-w: 920px;
-}
+} */
 
+
+      :root{
+  --black: #0d0e10;
+  --black-soft: #111216;
+  --panel: #15171b;
+  --panel-hover: #1b1e23;
+
+  --silver: #e2e4e7;
+  --silver-bright: #f5f5f5;
+  --silver-mid: #b7bbc2;
+  --silver-dark: #777b83;
+
+  --text: #e5e7eb;
+  --text-soft: #b7bac1;
+
+  --line: rgba(255,255,255,0.13);
+  --line-bright: rgba(255,255,255,0.24);
+}
 
 /* =========================================================
    GLOBAL
@@ -66,7 +85,7 @@ html{
   scroll-behavior:smooth;
 }
 
-body{
+/* body{
 
   margin:0;
 
@@ -81,13 +100,32 @@ body{
   line-height:1.55;
 
   -webkit-font-smoothing:antialiased;
+} */
+
+
+      body{
+
+  margin:0;
+
+  background:#0d0e10;
+
+  color:var(--text);
+
+  font-family:'Inter', sans-serif;
+
+  font-size:16px;
+
+  line-height:1.55;
+
+  -webkit-font-smoothing:antialiased;
 }
+
 
 
 /* =========================================================
    TYPOGRAPHY
    ========================================================= */
-
+/* 
 h1,
 h2,
 h3{
@@ -99,9 +137,20 @@ h3{
   margin:0 0 0.4em 0;
 
   color:var(--silver-bright);
+} */
+
+h1,
+h2,
+h3{
+  font-family:'DM Serif Display', serif;
+  font-weight:400;
+      
+  margin:0 0 0.4em 0;
+
+  color:var(--silver-bright);
 }
 
-
+      
 /* Main colorful headings */
 
 h1{
@@ -302,19 +351,26 @@ a{
 
 header{
 
+      
   position:sticky;
 
   top:0;
 
-  background:rgba(0,0,0,0.88);
+  /* background:rgba(0,0,0,0.88);
 
   backdrop-filter:blur(12px);
 
   -webkit-backdrop-filter:blur(12px);
 
-  border-bottom:1px solid rgba(255,255,255,0.16);
-
+  border-bottom:1px solid rgba(255,255,255,0.16); */
+  background:rgba(13,14,16,0.90);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,0.14);
   z-index:50;
+
+
+     
 }
 
 
@@ -628,18 +684,27 @@ section.active{
 
   position:relative;
 
-  background:
+  /* background:
     linear-gradient(
       145deg,
       #111111,
       #070707
     );
 
-  border:1px solid rgba(255,255,255,0.18);
+  border:1px solid rgba(255,255,255,0.18); */
 
   border-radius:6px;
 
   padding:20px;
+
+        background:
+    linear-gradient(
+      145deg,
+      #17191d,
+      #111317
+    );
+
+  border:1px solid rgba(255,255,255,0.15);
 
   overflow:hidden;
 
@@ -809,14 +874,17 @@ section.active{
   gap:20px;
 }
 
+   
 
 .project-card{
-
+/* 
   background:#090909;
 
-  border:1px solid rgba(255,255,255,0.18);
+  border:1px solid rgba(255,255,255,0.18); */
 
-  border-radius:6px;
+  background:#15171b;
+  border:1px solid rgba(255,255,255,0.15);
+      border-radius:6px;
 
   overflow:hidden;
 
