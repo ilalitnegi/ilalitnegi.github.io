@@ -9,46 +9,42 @@
 <meta name="description"
       content="Lalit Negi — Researcher working at the intersection of GIS, GeoAI, simulation, immersive technologies and inclusive technology.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
-      rel="stylesheet">
-
 <style>
 
 /* =========================================================
-   COLOR SYSTEM
+   COLOR SYSTEM  (LIGHT THEME)
+   Fonts: Times New Roman (headings) + Calibri (body)
    ========================================================= */
 
 :root{
 
-  --black: #000000;
-  --black-soft: #050505;
-  --panel: #0b0b0d;
-  --panel-hover: #111114;
+  --bg: #ffffff;
+  --bg-soft: #f6f7f9;
+  --panel: #ffffff;
+  --panel-hover: #f3f5f8;
 
-  /* Metallic silver */
-  --silver: #d9d9d9;
-  --silver-bright: #ffffff;
-  --silver-mid: #a7a7a7;
-  --silver-dark: #666666;
+  --ink: #111827;
+  --text: #1f2937;
+  --text-soft: #4b5563;
+  --text-mute: #6b7280;
 
-  --text: #eeeeee;
-  --text-soft: #b8b8b8;
+  --line: rgba(15,23,42,0.14);
+  --line-bright: rgba(15,23,42,0.28);
 
-  --line: rgba(255,255,255,0.15);
-  --line-bright: rgba(255,255,255,0.28);
+  /* Colour palette (deepened for contrast on white) */
+  --red: #e11d48;
+  --orange: #ea580c;
+  --yellow: #ca8a04;
+  --green: #16a34a;
+  --cyan: #0891b2;
+  --blue: #2563eb;
+  --purple: #7c3aed;
+  --pink: #db2777;
 
-  /* Color palette */
-  --red: #ff3b3b;
-  --orange: #ff9f1c;
-  --yellow: #ffe600;
-  --green: #35e06f;
-  --cyan: #00d9ff;
-  --blue: #4287ff;
-  --purple: #a855f7;
-  --pink: #ff4fd8;
+  --accent: #0369a1;
+
+  --font-heading: 'Times New Roman', Times, 'Liberation Serif', serif;
+  --font-body: Calibri, Carlito, 'Segoe UI', Arial, sans-serif;
 
   --max-w: 920px;
 }
@@ -70,15 +66,15 @@ body{
 
   margin:0;
 
-  background:#000000;
+  background:var(--bg);
 
   color:var(--text);
 
-  font-family:'IBM Plex Sans', sans-serif;
+  font-family:var(--font-body);
 
-  font-size:16px;
+  font-size:17px;
 
-  line-height:1.55;
+  line-height:1.6;
 
   -webkit-font-smoothing:antialiased;
 }
@@ -92,28 +88,28 @@ h1,
 h2,
 h3{
 
-  font-family:'Spectral', serif;
+  font-family:var(--font-heading);
 
-  font-weight:600;
+  font-weight:700;
 
   margin:0 0 0.4em 0;
 
-  color:var(--silver-bright);
+  color:var(--ink);
 }
 
 
-/* Main colorful headings */
+/* Main colourful headings */
 
 h1{
 
   background:linear-gradient(
     90deg,
-    #ffffff 0%,
-    #00d9ff 20%,
-    #4287ff 40%,
-    #a855f7 60%,
-    #ff4fd8 80%,
-    #ffffff 100%
+    #111827 0%,
+    #0891b2 20%,
+    #2563eb 40%,
+    #7c3aed 60%,
+    #db2777 80%,
+    #111827 100%
   );
 
   background-size:200% auto;
@@ -130,11 +126,11 @@ h2{
 
   background:linear-gradient(
     90deg,
-    #ffffff,
-    #00d9ff,
-    #a855f7,
-    #ff4fd8,
-    #ffffff
+    #111827,
+    #0891b2,
+    #7c3aed,
+    #db2777,
+    #111827
   );
 
   background-size:200% auto;
@@ -148,7 +144,7 @@ h2{
 }
 
 h3{
-  color:#ffffff;
+  color:var(--ink);
 }
 
 @keyframes headingFlow{
@@ -165,32 +161,34 @@ h3{
 
 
 a{
-  color:#ffffff;
+  color:var(--ink);
 }
 
 
 /* =========================================================
-   METALLIC TOPOGRAPHIC COORDINATES
+   COORDINATE LABELS (graphite shimmer)
    ========================================================= */
 
 .coord{
 
-  font-family:'IBM Plex Mono', monospace;
+  font-family:var(--font-body);
 
-  font-size:0.78rem;
+  font-size:0.85rem;
 
-  letter-spacing:0.04em;
+  font-weight:600;
 
-  color:#cfcfcf;
+  letter-spacing:0.06em;
+
+  color:#374151;
 
   background:
     linear-gradient(
       120deg,
-      #666666,
-      #ffffff,
-      #a0a0a0,
-      #ffffff,
-      #555555
+      #4b5563,
+      #111827,
+      #6b7280,
+      #111827,
+      #4b5563
     );
 
   background-size:300% auto;
@@ -201,9 +199,6 @@ a{
   -webkit-text-fill-color:transparent;
 
   animation:silverShine 5s linear infinite;
-
-  text-shadow:
-    0 0 8px rgba(255,255,255,0.08);
 }
 
 
@@ -228,15 +223,15 @@ a{
 
   background:linear-gradient(
     90deg,
-    #ff3030,
-    #ff8c00,
-    #ffe600,
-    #35e06f,
-    #00d9ff,
-    #4287ff,
-    #a855f7,
-    #ff4fd8,
-    #ff3030
+    #e11d48,
+    #ea580c,
+    #ca8a04,
+    #16a34a,
+    #0891b2,
+    #2563eb,
+    #7c3aed,
+    #db2777,
+    #e11d48
   );
 
   background-size:300% auto;
@@ -248,7 +243,7 @@ a{
 
   animation:rainbowMove 6s linear infinite;
 
-  font-weight:600;
+  font-weight:700;
 }
 
 @keyframes rainbowMove{
@@ -290,7 +285,7 @@ a{
 
   z-index:0;
 
-  opacity:0.8;
+  opacity:0.7;
 
   pointer-events:none;
 }
@@ -306,13 +301,13 @@ header{
 
   top:0;
 
-  background:rgba(0,0,0,0.88);
+  background:rgba(255,255,255,0.9);
 
   backdrop-filter:blur(12px);
 
   -webkit-backdrop-filter:blur(12px);
 
-  border-bottom:1px solid rgba(255,255,255,0.16);
+  border-bottom:1px solid var(--line);
 
   z-index:50;
 }
@@ -324,7 +319,7 @@ header{
 
   margin:0 auto;
 
-  padding:16px 28px;
+  padding:14px 28px;
 
   display:flex;
 
@@ -342,21 +337,21 @@ header{
 
 .brand{
 
-  font-family:'Spectral', serif;
+  font-family:var(--font-heading);
 
-  font-size:1.15rem;
+  font-size:1.35rem;
 
-  font-weight:600;
+  font-weight:700;
 
   text-decoration:none;
 
   background:linear-gradient(
     90deg,
-    #ffffff,
-    #00d9ff,
-    #a855f7,
-    #ff4fd8,
-    #ffffff
+    #111827,
+    #0891b2,
+    #7c3aed,
+    #db2777,
+    #111827
   );
 
   background-size:250% auto;
@@ -371,9 +366,15 @@ header{
 
 .brand span{
 
-  color:#ff4fd8;
+  color:#db2777;
 
-  -webkit-text-fill-color:#ff4fd8;
+  -webkit-text-fill-color:#db2777;
+
+}
+
+.brand .inclusive-rainbow{
+
+  -webkit-text-fill-color:transparent;
 
 }
 
@@ -391,9 +392,9 @@ nav.tabs{
 
 nav.tabs button{
 
-  font-family:'IBM Plex Sans', sans-serif;
+  font-family:var(--font-body);
 
-  font-size:0.92rem;
+  font-size:1rem;
 
   background:none;
 
@@ -401,7 +402,7 @@ nav.tabs button{
 
   padding:8px 14px;
 
-  color:#a8a8a8;
+  color:var(--text-soft);
 
   cursor:pointer;
 
@@ -415,22 +416,23 @@ nav.tabs button{
 
 nav.tabs button:hover{
 
-  background:#111111;
+  background:#eef1f5;
 
-  color:#ffffff;
+  color:var(--ink);
 
   transform:translateY(-1px);
 }
 
 nav.tabs button.active{
 
-  color:#ffffff;
+  color:var(--ink);
 
-  background:#101012;
+  font-weight:600;
+
+  background:#eef1f5;
 
   box-shadow:
-    inset 0 -2px 0 #00d9ff,
-    0 0 15px rgba(0,217,255,0.08);
+    inset 0 -2px 0 #0891b2;
 }
 
 
@@ -482,34 +484,31 @@ section.active{
 
 .hero h1{
 
-  font-size:clamp(2.4rem,5vw,3.5rem);
+  font-size:clamp(2.6rem,5.5vw,3.9rem);
 
-  line-height:1.12;
+  line-height:1.1;
 
   max-width:11ch;
 }
 
 .hero .role{
 
-  font-size:1.15rem;
+  font-size:1.25rem;
 
-  color:#00d9ff;
+  color:var(--accent);
 
-  font-weight:500;
+  font-weight:600;
 
   margin-bottom:22px;
-
-  text-shadow:
-    0 0 12px rgba(0,217,255,0.15);
 }
 
 .hero p.lede{
 
   max-width:60ch;
 
-  color:#c1c1c1;
+  color:var(--text-soft);
 
-  font-size:1.05rem;
+  font-size:1.15rem;
 }
 
 
@@ -530,15 +529,17 @@ section.active{
 
 .hero-links a{
 
-  font-family:'IBM Plex Mono', monospace;
+  font-family:var(--font-body);
 
-  font-size:0.85rem;
+  font-size:1rem;
+
+  font-weight:600;
 
   text-decoration:none;
 
-  color:#ffffff;
+  color:var(--ink);
 
-  border-bottom:1px solid #888;
+  border-bottom:1px solid #6b7280;
 
   padding-bottom:3px;
 
@@ -549,9 +550,9 @@ section.active{
 
 .hero-links a:hover{
 
-  color:#00d9ff;
+  color:var(--accent);
 
-  border-color:#00d9ff;
+  border-color:var(--accent);
 }
 
 
@@ -576,7 +577,7 @@ section.active{
 
 .section-head h2{
 
-  font-size:1.7rem;
+  font-size:2rem;
 }
 
 .section-head .coord{
@@ -592,11 +593,11 @@ section.active{
 .lead-para,
 .researchlead-para{
 
-  font-size:1.05rem;
+  font-size:1.15rem;
 
   max-width:100ch;
 
-  color:#d0d0d0;
+  color:var(--text);
 
   text-align:justify;
 }
@@ -631,17 +632,19 @@ section.active{
   background:
     linear-gradient(
       145deg,
-      #111111,
-      #070707
+      #ffffff,
+      #f6f7f9
     );
 
-  border:1px solid rgba(255,255,255,0.18);
+  border:1px solid var(--line);
 
   border-radius:6px;
 
   padding:20px;
 
   overflow:hidden;
+
+  box-shadow:0 2px 8px rgba(15,23,42,0.05);
 
   transition:
     transform 0.25s ease,
@@ -650,7 +653,7 @@ section.active{
 }
 
 
-/* subtle colorful glow */
+/* top colour strip */
 
 .interest-card::before{
 
@@ -664,18 +667,13 @@ section.active{
 
   width:100%;
 
-  height:2px;
+  height:3px;
 
   background:linear-gradient(
     90deg,
-    /* #ff3030,
-    #ff9f1c,
-    #ffe600,
-    #35e06f,
-    #00d9ff, */
-    #4287ff,
-    #a855f7,
-    #ff4fd8
+    #2563eb,
+    #7c3aed,
+    #db2777
   );
 }
 
@@ -684,11 +682,10 @@ section.active{
 
   transform:translateY(-4px);
 
-  border-color:rgba(255,255,255,0.38);
+  border-color:var(--line-bright);
 
   box-shadow:
-    0 12px 40px rgba(0,0,0,0.65),
-    0 0 20px rgba(0,217,255,0.05);
+    0 12px 30px rgba(15,23,42,0.12);
 }
 
 
@@ -700,15 +697,15 @@ section.active{
 }
 
 
-/* Color individual coordinate labels */
+/* Colour individual coordinate labels */
 
 .interest-card:nth-child(1) .coord{
 
   background:linear-gradient(
     90deg,
-    #ff3030,
-    #ff8c00,
-    #ffe600
+    #e11d48,
+    #ea580c,
+    #ca8a04
   );
 
   -webkit-background-clip:text;
@@ -722,8 +719,8 @@ section.active{
 
   background:linear-gradient(
     90deg,
-    #00d9ff,
-    #4287ff
+    #0891b2,
+    #2563eb
   );
 
   -webkit-background-clip:text;
@@ -737,8 +734,8 @@ section.active{
 
   background:linear-gradient(
     90deg,
-    #35e06f,
-    #00d9ff
+    #16a34a,
+    #0891b2
   );
 
   -webkit-background-clip:text;
@@ -752,8 +749,8 @@ section.active{
 
   background:linear-gradient(
     90deg,
-    #4287ff,
-    #a855f7
+    #2563eb,
+    #7c3aed
   );
 
   -webkit-background-clip:text;
@@ -767,8 +764,8 @@ section.active{
 
   background:linear-gradient(
     90deg,
-    #a855f7,
-    #ff4fd8
+    #7c3aed,
+    #db2777
   );
 
   -webkit-background-clip:text;
@@ -780,7 +777,7 @@ section.active{
 
 .interest-card h3{
 
-  font-size:1.05rem;
+  font-size:1.25rem;
 
   margin-bottom:6px;
 }
@@ -789,9 +786,9 @@ section.active{
 
   margin:0;
 
-  color:#a9a9a9;
+  color:var(--text-soft);
 
-  font-size:0.94rem;
+  font-size:1.02rem;
 }
 
 
@@ -812,9 +809,9 @@ section.active{
 
 .project-card{
 
-  background:#090909;
+  background:#ffffff;
 
-  border:1px solid rgba(255,255,255,0.18);
+  border:1px solid var(--line);
 
   border-radius:6px;
 
@@ -830,6 +827,8 @@ section.active{
 
   font-family:inherit;
 
+  color:inherit;
+
   display:flex;
 
   flex-direction:column;
@@ -842,6 +841,8 @@ section.active{
 
   -webkit-appearance:none;
 
+  box-shadow:0 2px 8px rgba(15,23,42,0.06);
+
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
@@ -852,10 +853,10 @@ section.active{
 
   transform:translateY(-4px);
 
-  border-color:rgba(255,255,255,0.38);
+  border-color:var(--line-bright);
 
   box-shadow:
-    0 15px 40px rgba(0,0,0,0.7);
+    0 14px 32px rgba(15,23,42,0.15);
 }
 
 
@@ -879,7 +880,7 @@ section.active{
 
   object-position:center;
 
-  background:#111;
+  background:#e5e7eb;
 }
 
 
@@ -897,7 +898,7 @@ section.active{
 
 .project-body h3{
 
-  font-size:1.1rem;
+  font-size:1.2rem;
 
   margin-bottom:6px;
 }
@@ -906,9 +907,9 @@ section.active{
 
   margin:0;
 
-  color:#aaa;
+  color:var(--text-soft);
 
-  font-size:0.92rem;
+  font-size:1rem;
 }
 
 
@@ -929,19 +930,19 @@ section.active{
 
 .tag{
 
-  font-family:'IBM Plex Mono', monospace;
+  font-family:var(--font-body);
 
-  font-size:0.72rem;
+  font-size:0.82rem;
 
-  padding:4px 8px;
+  padding:4px 9px;
 
-  background:#151515;
+  background:#eef1f5;
 
-  border:1px solid rgba(255,255,255,0.14);
+  border:1px solid rgba(15,23,42,0.14);
 
   border-radius:3px;
 
-  color:#c8c8c8;
+  color:#374151;
 }
 
 
@@ -955,7 +956,7 @@ section.active{
 
   inset:0;
 
-  background:rgba(0,0,0,0.85);
+  background:rgba(243,244,246,0.82);
 
   backdrop-filter:blur(8px);
 
@@ -982,14 +983,9 @@ section.active{
 
 .modal{
 
-  background:
-    linear-gradient(
-      145deg,
-      #111111,
-      #050505
-    );
+  background:#ffffff;
 
-  border:1px solid rgba(255,255,255,0.22);
+  border:1px solid var(--line-bright);
 
   max-width:900px;
 
@@ -1004,7 +1000,7 @@ section.active{
   animation:rise 0.18s ease;
 
   box-shadow:
-    0 30px 80px rgba(0,0,0,0.8);
+    0 24px 60px rgba(15,23,42,0.22);
 }
 
 
@@ -1035,18 +1031,18 @@ section.active{
 
   border:none;
 
-  font-size:1.5rem;
+  font-size:1.7rem;
 
   line-height:1;
 
   cursor:pointer;
 
-  color:#aaa;
+  color:#6b7280;
 }
 
 .modal-close:hover{
 
-  color:#ffffff;
+  color:var(--ink);
 }
 
 .modal .coord{
@@ -1056,20 +1052,20 @@ section.active{
 
 .modal h3{
 
-  font-size:1.5rem;
+  font-size:1.7rem;
 
   margin-bottom:4px;
 }
 
 .modal .role-line{
 
-  color:#00d9ff;
+  color:var(--accent);
 
-  font-weight:500;
+  font-weight:600;
 
   margin-bottom:18px;
 
-  font-size:0.95rem;
+  font-size:1.05rem;
 }
 
 
@@ -1100,9 +1096,9 @@ section.active{
 
   object-position:center;
 
-  background:#080808;
+  background:#f3f4f6;
 
-  border:1px solid rgba(255,255,255,0.18);
+  border:1px solid var(--line);
 
   border-radius:4px;
 
@@ -1112,9 +1108,9 @@ section.active{
 
 .modal p{
 
-  color:#d0d0d0;
+  color:var(--text);
 
-  font-size:0.98rem;
+  font-size:1.05rem;
 }
 
 
@@ -1153,17 +1149,19 @@ section.active{
 
 .pub-year{
 
-  font-family:'IBM Plex Mono', monospace;
+  font-family:var(--font-body);
 
-  font-size:0.85rem;
+  font-size:1rem;
+
+  font-weight:700;
 
   min-width:44px;
 
   background:linear-gradient(
     90deg,
-    #00d9ff,
-    #a855f7,
-    #ff4fd8
+    #0891b2,
+    #7c3aed,
+    #db2777
   );
 
   -webkit-background-clip:text;
@@ -1176,16 +1174,16 @@ section.active{
 
 .pub-text{
 
-  color:#aaa;
+  color:var(--text-soft);
 
-  font-size:0.95rem;
+  font-size:1.05rem;
 }
 
 .pub-text strong{
 
-  color:#ffffff;
+  color:var(--ink);
 
-  font-weight:600;
+  font-weight:700;
 }
 
 
@@ -1199,19 +1197,21 @@ section.active{
 
   display:inline-block;
 
-  font-family:'IBM Plex Mono', monospace;
+  font-family:var(--font-body);
 
-  font-size:0.88rem;
+  font-size:1rem;
+
+  font-weight:600;
 
   padding:10px 18px;
 
-  border:1px solid rgba(255,255,255,0.35);
+  border:1px solid var(--ink);
 
   border-radius:3px;
 
   text-decoration:none;
 
-  color:#ffffff;
+  color:var(--ink);
 
   transition:
     background 0.2s ease,
@@ -1221,11 +1221,11 @@ section.active{
 
 .cv-download:hover{
 
-  background:#ffffff;
+  background:var(--ink);
 
-  color:#000000;
+  color:#ffffff;
 
-  border-color:#ffffff;
+  border-color:var(--ink);
 }
 
 
@@ -1255,13 +1255,13 @@ section.active{
 .contact-item a,
 .contact-item span{
 
-  font-size:1rem;
+  font-size:1.1rem;
 }
 
 
 .contact-item a{
 
-  color:#ffffff;
+  color:var(--ink);
 
   text-decoration:none;
 
@@ -1274,9 +1274,9 @@ section.active{
 
 .contact-item a:hover{
 
-  color:#00d9ff;
+  color:var(--accent);
 
-  border-color:#00d9ff;
+  border-color:var(--accent);
 }
 
 
@@ -1292,12 +1292,12 @@ footer{
 
   text-align:center;
 
-  background:#000000;
+  background:var(--bg-soft);
 }
 
 footer .coord{
 
-  opacity:0.8;
+  opacity:0.9;
 }
 
 
@@ -1432,31 +1432,31 @@ footer .coord{
 
     <g
       fill="none"
-      stroke="#bdbdbd"
+      stroke="#8b95a5"
       stroke-width="1">
 
       <path
-        opacity="0.38"
+        opacity="0.45"
         d="M-20,60 C150,20 300,110 460,70 C620,30 760,90 940,50"/>
 
       <path
-        opacity="0.32"
+        opacity="0.38"
         d="M-20,110 C160,70 300,160 470,120 C630,80 770,140 940,100"/>
 
       <path
-        opacity="0.28"
+        opacity="0.32"
         d="M-20,160 C170,120 310,210 480,170 C640,130 780,190 940,150"/>
 
       <path
-        opacity="0.24"
+        opacity="0.26"
         d="M-20,210 C180,170 320,260 490,220 C650,180 790,240 940,200"/>
 
       <path
-        opacity="0.20"
+        opacity="0.22"
         d="M-20,260 C190,220 330,310 500,270 C660,230 800,290 940,250"/>
 
       <path
-        opacity="0.16"
+        opacity="0.18"
         d="M-20,310 C200,270 340,360 510,320 C670,280 810,340 940,300"/>
 
     </g>
@@ -1468,14 +1468,14 @@ footer .coord{
       cx="640"
       cy="140"
       r="4"
-      fill="#ffffff"/>
+      fill="#111827"/>
 
     <text
       x="652"
       y="144"
-      font-family="IBM Plex Mono"
-      font-size="11"
-      fill="#d8d8d8">
+      font-family="Calibri, Carlito, Arial, sans-serif"
+      font-size="12"
+      fill="#374151">
 
       28.61°N, 77.20°E
 
@@ -2773,4 +2773,3 @@ document.addEventListener('click', function () {
 
 </body>
 </html>
-
